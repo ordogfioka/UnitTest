@@ -104,6 +104,16 @@ void UnitTestTest::layout()
     Layout layout(graphs);
     layout.run(5);
 
+    QVERIFY(mainCluster->getVertexes()[0]->x==0);
+    QVERIFY(mainCluster->getVertexes()[0]->y==0);
+
+    QVERIFY(resultGraph->getVertexes()[0]->x==3);
+    QVERIFY(resultGraph->getVertexes()[0]->y==0);
+
+    QVERIFY(resultGraph->getVertexes()[1]->x==-3);
+    QVERIFY(resultGraph->getVertexes()[1]->x==-3);
+
+
 }
 
 
