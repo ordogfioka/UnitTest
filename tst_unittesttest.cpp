@@ -30,6 +30,10 @@ UnitTestTest::UnitTestTest()
     graph.loadFromFile("../UnitTest/graph.txt");
 }
 
+/**
+ * @brief UnitTestTest::initTestCase
+ * Tests the initialization of the graph
+ */
 void UnitTestTest::initTestCase()
 {
     QVERIFY(6 == graph.getVertexes().size());
@@ -41,25 +45,41 @@ void UnitTestTest::initTestCase()
     QVERIFY(graph.getEdges()[5].size()==3);
 }
 
-
+/**
+ * @brief UnitTestTest::structuralSimilarity
+ * Tests the struturalSimilaríty
+ */
 void UnitTestTest::structuralSimilarity()
 {
     QVERIFY(0.5==graph.structuralSimilarity(1,2));
     QVERIFY(1==graph.structuralSimilarity(4,5));
     QVERIFY(0==graph.structuralSimilarity(1,5));
 }
+/**
+ * @brief UnitTestTest::isCore
+ * Tests the isCore function
+ */
 void UnitTestTest::isCore()
 {
     for(int i=0;i<=5;i++)
         QVERIFY((i>2) == graph.isCore(i,0.9,2));
 }
+/**
+ * @brief UnitTestTest::addEdge
+ * Tests if new wdge is added
+ */
 void UnitTestTest::addEdge()
 {
+    QVERIFY(2 == graph.getEdges()[1].size());
+    QVERIFY(2 == graph.getEdges()[2].size());
     graph.addEdge(1,2);
     QVERIFY(3 == graph.getEdges()[1].size());
     QVERIFY(3 == graph.getEdges()[2].size());
 }
-
+/**
+ * @brief UnitTestTest::noMultipleEdge
+ * Tests the addEdge() method to not add new edge if exist
+ */
 void UnitTestTest::noMultipleEdge()
 {
     QVERIFY(3 == graph.getEdges()[1].size());
@@ -68,6 +88,12 @@ void UnitTestTest::noMultipleEdge()
     QVERIFY(3 == graph.getEdges()[1].size());
     QVERIFY(3 == graph.getEdges()[2].size());
 }
+/**
+ * @brief UnitTestTest::clusterize
+ * Tests the clusterize() method of the graph
+ * Also tests created new graph
+ * Also tests the creted hierarhy
+ */
 void UnitTestTest::clusterize()
 {
     int max=0,value=2;
@@ -99,8 +125,14 @@ void UnitTestTest::clusterize()
     graphs.push_back(resultGraph);
     graphs.push_back(mainCluster);
 }
+/**
+ * @brief UnitTestTest::layout
+ * Layout methdod
+ * Verfify if coordinates are good
+ */
 void UnitTestTest::layout()
 {
+
     Layout layout(graphs);
     layout.run(5);
 
@@ -109,11 +141,8 @@ void UnitTestTest::layout()
 
     QVERIFY(resultGraph->getVertexes()[0]->x==3);
     QVERIFY(resultGraph->getVertexes()[0]->y==0);
-
     QVERIFY(resultGraph->getVertexes()[1]->x==-3);
     QVERIFY(resultGraph->getVertexes()[1]->x==-3);
-
-
 }
 
 
